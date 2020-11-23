@@ -24,12 +24,15 @@ class ProductListScreen extends StatelessWidget{
     return StreamBuilder(
       initialData: productBloc.getAll(),
       stream: productBloc.getProduct,
-      builder: (context, snapshot) => snapshot.data.length>0?buildProductListItems(snapshot):CircularProgressIndicator,
+      builder: (context, snapshot) => snapshot.data.length>0?buildProductListItems(snapshot):CircularProgressIndicator(),
     );
   }
 
   Widget buildProductListItems(AsyncSnapshot snapshot) {
-    return ListView.builder(itemCount: snapshot.data.length, itemBuilder: (BuildContext context, index){
+    return ListView.builder(
+        itemCount: snapshot.data.length,
+        itemBuilder: (BuildContext context, index)
+        {
       final list = snapshot.data;
       return ListTile(
         title: Text(list[index].name),
